@@ -1,6 +1,6 @@
 import fs from "fs"
-import path from "path"
 import { globby } from "globby"
+import path from "path"
 
 // Configuration object
 const config = {
