@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner"
 import { Toaster } from "@/components/ui/toaster"
 import type { Metadata, Viewport } from "next"
 import { Inter as FontSans } from "next/font/google"
-import Script from "next/script"
 import "./globals.css"
 
 const fontSans = FontSans({
@@ -50,12 +49,6 @@ export default function RootLayout({
         </ThemeProvider>
         <Toaster />
         <Sonner />
-        <Script
-          src="https://plausible.cruip.com/js/script.js"
-          data-domain="originui.com"
-          strategy="beforeInteractive"
-          defer
-        />
       </body>
     </html>
   )
