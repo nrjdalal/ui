@@ -111,16 +111,15 @@ for (const file of components) {
     (importPath) => !importPath.startsWith(config.aliasPrefix),
   )
   // Generate a name for the component
-  let name = file
+  const name = file
     .split(path.join(config.srcDir, config.registry.components.path))[1]
-    .replace(/\//g, "-")
     .split(".")[0]
-  name = name.startsWith("-") ? name.substring(1) : name
+
   // Read the file content
   const fileContent = fs.readFileSync(file, "utf-8")
   // Push the component details to the result array
   result.push({
-    name: name,
+    name: name.slice(1),
     type: config.registry.components.type,
     dependencies: dependencies,
     files: [
@@ -145,11 +144,21 @@ let count = 0
 for (const component of result) {
   count++
   console.log(count + ". " + component.name)
+  fs.mkdirSync(
+    path.resolve(
+      projectRoot,
+      config.outputDir +
+        component.name.substring(0, component.name.lastIndexOf("/")),
+    ),
+    { recursive: true },
+  )
+
   const filePath = path.resolve(
     projectRoot,
-    config.outputDir,
-    `${component.name}.json`,
+    config.outputDir + `${component.name}.json`,
   )
+
   fs.writeFileSync(filePath, JSON.stringify(component, null, 2) + "\n")
 }
+
 console.log(`Registry components written: ${count}`)

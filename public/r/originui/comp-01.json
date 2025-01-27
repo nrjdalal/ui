@@ -1,0 +1,31 @@
+{
+  "name": "originui/comp-01",
+  "type": "registry:component",
+  "dependencies": ["clsx", "react", "tailwind-merge"],
+  "files": [
+    {
+      "path": "components/x/originui/comp-01.tsx",
+      "target": "components/x/originui/comp-01.tsx",
+      "content": "import { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { useId } from \"react\"\n\nexport default function Component() {\n  const id = useId()\n  return (\n    <div className=\"space-y-2\">\n      <Label htmlFor={id}>Simple input</Label>\n      <Input id={id} placeholder=\"Email\" type=\"email\" />\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/ui/input.tsx",
+      "target": "components/ui/input.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\nimport * as React from \"react\"\n\nconst Input = React.forwardRef<HTMLInputElement, React.ComponentProps<\"input\">>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"border-input bg-background text-foreground placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/20 flex h-9 w-full rounded-lg border px-3 py-2 text-sm shadow-sm shadow-black/5 transition-shadow focus-visible:ring-[3px] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50\",\n          type === \"search\" &&\n            \"[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none\",\n          type === \"file\" &&\n            \"text-muted-foreground/70 file:border-input file:text-foreground p-0 pr-3 italic file:me-3 file:h-full file:border-0 file:border-r file:border-solid file:bg-transparent file:px-3 file:text-sm file:font-medium file:not-italic\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "components/ui/label.tsx",
+      "target": "components/ui/label.tsx",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\nimport * as React from \"react\"\n\nconst Label = React.forwardRef<\n  HTMLLabelElement,\n  React.LabelHTMLAttributes<HTMLLabelElement>\n>(({ className, ...props }, ref) => (\n  <label\n    ref={ref}\n    className={cn(\n      \"text-foreground text-sm leading-4 font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n      className,\n    )}\n    {...props}\n  />\n))\nLabel.displayName = \"Label\"\n\nexport { Label }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "lib/utils.ts",
+      "target": "lib/utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}
