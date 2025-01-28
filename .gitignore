@@ -42,4 +42,3 @@ next-env.d.ts
 
 # custom
 package-lock.json
-bun.lock
